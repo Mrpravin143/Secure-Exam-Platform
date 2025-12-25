@@ -1,0 +1,167 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Bootstrap + Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="container-fluid">
+
+    <!-- PAGE HEADER -->
+    <div class="text-center mb-4 pb-3 border-bottom">
+        <h2 class="fw-bold">Smart Exam Conducting Platform</h2>
+        <p class="text-muted mb-0">Admin Analytics Dashboard</p>
+    </div>
+
+    <!-- STUDENT OVERVIEW -->
+    <div class="mb-5">
+        <h5 class="fw-semibold mb-3 border-start border-4 border-primary ps-2">
+            <i class="bi bi-people-fill me-2"></i>Student Overview
+        </h5>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6">
+                <div class="card shadow-sm rounded-4">
+                    <div class="card-body">
+                        <h6 class="text-center fw-semibold mb-3">
+                            <i class="bi bi-graph-up-arrow me-1"></i>Student Activity
+                        </h6>
+                        <div style="height:300px;">
+                            <canvas id="studentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT ANALYSIS -->
+    <div class="mb-4">
+        <h5 class="fw-semibold mb-3 border-start border-4 border-success ps-2">
+            <i class="bi bi-bar-chart-fill me-2"></i>Result Analysis
+        </h5>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-lg-4 col-md-6">
+                <div class="card shadow-sm rounded-4">
+                    <div class="card-body">
+                        <h6 class="text-center fw-semibold mb-3">
+                            <i class="bi bi-pie-chart-fill me-1"></i>Pass / Fail Ratio
+                        </h6>
+                        <div style="height:280px;">
+                            <canvas id="passFailChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPORT -->
+        <div class="text-end mb-3">
+            <a href="/admin/dashboard/export-results/"
+               class="btn btn-primary btn-sm rounded-pill">
+                <i class="bi bi-download me-1"></i>Export Result CSV
+            </a>
+        </div>
+
+        <!-- RESULT TABLE -->
+        <!-- RESULT TABLE -->
+<div class="card shadow-sm rounded-4">
+    <div class="card-body">
+
+        <h6 class="fw-semibold mb-3">
+            <i class="bi bi-table me-2"></i>Student Result List
+        </h6>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Student Name</th>
+                        <th>Mobile</th>
+                        <th>Percentage</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in results %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            {{ r.student_exam.student.full_name }}
+                        </td>
+
+                        <td>
+                            {{ r.student_exam.student.studentprofile.mobile }}
+                        </td>
+
+                        <td>
+                            {{ r.percentage }} %
+                        </td>
+
+                        <td>
+                            {% if r.is_pass %}
+                                <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                                    <i class="bi bi-check-circle-fill me-1"></i>Pass
+                                </span>
+                            {% else %}
+                                <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
+                                    <i class="bi bi-x-circle-fill me-1"></i>Fail
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-muted text-center">
+                            No results found
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+new Chart(studentChart, {
+    type: 'doughnut',
+    data: {
+        labels: ['Total Students', 'Submitted Exams'],
+        datasets: [{
+            data: [{{ total_students }}, {{ submitted_exams }}],
+            backgroundColor: ['#6f42c1', '#fd7e14']
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(passFailChart, {
+    type: 'pie',
+    data: {
+        labels: ['Pass', 'Fail'],
+        datasets: [{
+            data: [{{ pass_count }}, {{ fail_count }}],
+            backgroundColor: ['#198754', '#dc3545']
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+</script>
+
+{% endblock %}

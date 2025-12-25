@@ -1,0 +1,86 @@
+/* ===== FORM WRAPPER ===== */
+.app-form-wrapper {
+    max-width: 800px;
+    margin: 60px auto;
+    background: #ffffff;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+    border-radius: 0; /* SQUARE */
+}
+
+/* ===== HEADER STRIP ===== */
+.app-form-header {
+    background: #003366;
+    color: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-form-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.step-text {
+    font-size: 13px;
+    color: #cce0ff;
+}
+
+/* ===== BODY ===== */
+.app-form-body {
+    padding: 25px;
+}
+
+/* ===== INPUTS ===== */
+.app-form-body input,
+.app-form-body textarea,
+.app-form-body select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.app-form-body input:focus,
+.app-form-body textarea:focus {
+    border-color: #003366;
+    outline: none;
+}
+
+/* ===== FILE ===== */
+.app-form-body input[type="file"] {
+    padding: 6px;
+}
+
+/* ===== CHECKBOX ===== */
+.app-form-body label {
+    font-size: 14px;
+}
+
+/* ===== BUTTON ===== */
+.app-form-body button {
+    background: #003366;
+    color: #ffffff;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 0;
+    float: right;
+}
+
+.app-form-body button:hover {
+    background: #002244;
+}
+
+/* ===== INFO VIEW (FINAL PAGE) ===== */
+.app-info p {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.app-info img {
+    border: 1px solid #ccc;
+    padding: 4px;
+}

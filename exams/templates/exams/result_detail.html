@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .page-border {
+    border: 4px solid black;
+    padding: 20px;
+}
+
+</style>
+
+<div class="page-border">
+<h3>R.C. Patel Institute of Management Research and Development</h3>
+<p>NAAC Grade: B+</p>
+<p>KBCNMU, Jalgaon</p>
+<h6><b>IMRD Tech Club</b></h6>
+
+<hr>
+
+<p><b>Application No:</b> {{ result.application_number }}</p>
+<p><b>Student:</b> {{ result.student_exam.student.email }}</p>
+<p><b>Exam:</b> {{ result.student_exam.exam.title }}</p>
+
+<table border="1" width="100%">
+<tr>
+<th>Q No</th><th>Question</th><th>Status</th><th>Marks</th>
+</tr>
+
+{% for d in data %}
+<tr>
+<td>{{ d.no }}</td>
+<td>{{ d.question }}</td>
+<td>{{ d.status }}</td>
+<td>{{ d.marks }}</td>
+</tr>
+{% endfor %}
+
+<tr>
+<td colspan="3"><b>Total</b></td>
+<td><b>{{ result.obtained_marks }}/{{ result.total_marks }}</b></td>
+</tr>
+</table>
+
+<h3>
+{% if result.is_pass %}
+🎉 Congratulations! You have PASSED.
+{% else %}
+👏 Good attempt! Keep learning.
+{% endif %}
+</h3>
+
+<a href="{% url 'exams:download_result_pdf' result.id %}">Download PDF</a>
+</div>
+
+
+{% endblock %}

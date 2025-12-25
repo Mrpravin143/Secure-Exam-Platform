@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="app-form-wrapper">
+    <div class="app-form-header">
+        <h2>Application Form</h2>
+    </div>
+
+    <div class="app-form-body app-info">
+        <p><b>Name:</b> {{ profile.user.full_name }}</p>
+        <p><b>Email:</b> {{ profile.user.email }}</p>
+        <p><b>Application No:</b> {{ profile.application_no }}</p>
+
+        <img src="{{ profile.profile_image.url }}" width="150"><br><br>
+
+        <a href="{% url 'download-application' %}">
+            📄 Download Application PDF
+        </a><b>|</b>
+
+        
+        <a href="{% url 'login' %}">
+           Click to Login
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}

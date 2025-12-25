@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex justify-content-center my-5">
+
+    <div class="card shadow-sm" style="width:420px; border:1px solid #999;">
+
+        <!-- Header -->
+        <div class="card-header bg-light text-center py-3">
+            <h6 class="fw-bold mb-0">
+                <i class="bi bi-file-earmark-text-fill"></i>
+                Application Form Preview
+            </h6>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4">
+
+            <!-- User Details -->
+            <p>
+                <i class="bi bi-person-fill text-primary"></i>
+                <b>Name:</b> {{ profile.user.full_name }}
+            </p>
+
+            <p>
+                <i class="bi bi-envelope-fill text-primary"></i>
+                <b>Email:</b> {{ profile.user.email }}
+            </p>
+
+            <p>
+                <i class="bi bi-file-person-fill text-primary"></i>
+                <b>Application No:</b> {{ profile.application_no }}
+            </p>
+
+            <!-- Profile Image -->
+            <p class="text-center my-3">
+                <i class="bi bi-image-fill text-primary mb-2" style="font-size:24px;"></i><br>
+                <img src="{{ profile.profile_image.url }}"
+                     class="img-thumbnail"
+                     width="150"
+                     alt="Profile Image">
+            </p>
+
+            <!-- Download Button -->
+            <div class="text-center mt-3">
+                <a href="{% url 'download-application' %}" 
+                   class="btn btn-secondary btn-sm px-4">
+                   <i class="bi bi-download"></i> Download PDF
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

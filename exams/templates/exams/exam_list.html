@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-4">
+
+    <h3 class="text-center mb-4 fw-bold">
+        <i class="bi bi-journal-text"></i> Available Exams
+    </h3>
+
+    <div class="row g-4">
+        {% for exam in exams %}
+        <div class="col-md-4 col-sm-6">
+            <div class="card shadow-sm h-100 exam-card">
+
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">
+                        <i class="bi bi-book"></i> {{ exam.title }}
+                    </h5>
+
+                    <p class="card-text text-muted">
+                        {{ exam.description }}
+                    </p>
+
+                    <ul class="list-unstyled small">
+                        <li>
+                            <i class="bi bi-clock"></i>
+                            <b>Duration:</b> {{ exam.duration_minutes }} min
+                        </li>
+                        <li>
+                            <i class="bi bi-award"></i>
+                            <b>Total Marks:</b> {{ exam.total_marks }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-footer bg-white border-0 text-center">
+                    <a href="{% url 'exams:exam-confirm' exam.id %}"
+                       class="btn btn-success w-100">
+                        <i class="bi bi-play-circle"></i> Start Exam
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted">
+            <i class="bi bi-info-circle"></i> No exams available.
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

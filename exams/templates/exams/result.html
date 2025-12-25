@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5 d-flex justify-content-center">
+
+    <div class="card shadow-lg result-card text-center p-4" style="max-width: 500px; width:100%;">
+
+        <h3 class="fw-bold mb-3">📊 Exam Result</h3>
+
+        <hr>
+
+        <div class="row text-start mb-3">
+            <div class="col-6"><b>Total Marks</b></div>
+            <div class="col-6 text-end">{{ total_marks }}</div>
+
+            <div class="col-6"><b>Obtained Marks</b></div>
+            <div class="col-6 text-end">{{ obtained_marks }}</div>
+
+            <div class="col-6"><b>Passing Marks</b></div>
+            <div class="col-6 text-end">{{ passing_marks }}</div>
+        </div>
+
+        <hr>
+
+        {% if result_status == "PASS" %}
+            <h2 class="text-success fw-bold mt-3">✅ PASS</h2>
+            <p class="text-muted">Congratulations! You have cleared the exam.</p>
+        {% else %}
+            <h2 class="text-danger fw-bold mt-3">❌ FAIL</h2>
+            <p class="text-muted">Better luck next time.</p>
+        {% endif %}
+
+        <a href="{% url 'exams:exam-list' %}" class="btn btn-outline-primary mt-4">
+            Back to Exams
+        </a>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+window.onload = function () {
+    playSound("{% static 'sounds/submit_success.mp3' %}");
+};
+</script>
+
+{% endblock %}

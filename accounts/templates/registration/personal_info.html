@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex justify-content-center my-5">
+
+    <div class="card shadow-sm" style="width:420px; border:1px solid #999;">
+
+        <!-- Header -->
+        <div class="card-header bg-light text-center py-3">
+            <h6 class="fw-bold mb-0">
+                <i class="bi bi-person-plus-fill"></i>
+                New User Registration
+            </h6>
+            <small class="text-muted">
+                Tech-Club Examination
+            </small>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4">
+
+            <form method="post" id="examForm">
+                {% csrf_token %}
+
+                <!-- Full Name -->
+                <div class="mb-2">
+                    <label class="form-label">
+                        <i class="bi bi-person-fill text-primary"></i> Full Name
+                    </label>
+                    <input type="text" name="full_name" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- Email -->
+                <div class="mb-2">
+                    <label class="form-label">
+                        <i class="bi bi-envelope-fill text-primary"></i> Email
+                    </label>
+                    <input type="email" name="email" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- Password -->
+                <div class="mb-2">
+                    <label class="form-label">
+                        <i class="bi bi-lock-fill text-primary"></i> Password
+                    </label>
+                    <input type="password" name="password" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- Mobile -->
+                <div class="mb-2">
+                    <label class="form-label">
+                        <i class="bi bi-phone-fill text-primary"></i> Mobile Number
+                    </label>
+                    <input type="text" name="mobile" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="mb-2">
+                    <label class="form-label">
+                        <i class="bi bi-calendar-fill text-primary"></i> Date of Birth
+                    </label>
+                    <input type="date" name="dob" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- Address -->
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="bi bi-geo-alt-fill text-primary"></i> Permanent Address
+                    </label>
+                    <textarea name="address" class="form-control form-control-sm rounded-0"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-secondary btn-sm px-4">
+                        <i class="bi bi-arrow-right-circle"></i> Next
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5 d-flex justify-content-center">
+
+    <div class="card shadow-lg p-4 exam-confirm-card" style="max-width: 600px; width:100%;">
+
+        <h3 class="text-center fw-bold text-primary mb-3">
+            <i class="bi bi-pencil-square"></i> {{ exam.title }}
+        </h3>
+
+        <p class="text-muted text-center">
+            {{ exam.description }}
+        </p>
+
+        <hr>
+
+       <h6 class="fw-bold mb-2">
+    <i class="bi bi-info-circle"></i> Exam Instructions
+</h6>
+
+<div class="border rounded p-3 mb-4" style="max-height: 220px; overflow-y: auto; background:#f9f9f9;">
+
+    <!-- English -->
+    <div class="mb-3">
+        <h6 class="fw-bold text-primary">English</h6>
+        <ul class="small">
+            <li>Exam duration is {{ exam.duration_minutes }} minutes.</li>
+            <li>Do not refresh or switch browser tabs during the exam.</li>
+            <li>The exam will auto-submit once the time is over.</li>
+            <li>Ensure stable internet connection before starting.</li>
+            <li>Once started, the exam cannot be paused.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- Marathi -->
+    <div class="mb-3">
+        <h6 class="fw-bold text-success">मराठी</h6>
+        <ul class="small">
+            <li>परीक्षेचा कालावधी {{ exam.duration_minutes }} मिनिटांचा आहे.</li>
+            <li>परीक्षा सुरू असताना पेज रिफ्रेश किंवा टॅब बदलू नका.</li>
+            <li>वेळ संपल्यानंतर परीक्षा आपोआप सबमिट होईल.</li>
+            <li>परीक्षेपूर्वी इंटरनेट कनेक्शन योग्य आहे याची खात्री करा.</li>
+            <li>परीक्षा एकदा सुरू झाल्यावर थांबवता येणार नाही.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- Hindi -->
+    <div>
+        <h6 class="fw-bold text-danger">हिंदी</h6>
+        <ul class="small">
+            <li>परीक्षा की अवधि {{ exam.duration_minutes }} मिनट है।</li>
+            <li>परीक्षा के दौरान पेज को रिफ्रेश या टैब स्विच न करें।</li>
+            <li>समय समाप्त होने पर परीक्षा स्वतः सबमिट हो जाएगी।</li>
+            <li>परीक्षा शुरू करने से पहले इंटरनेट कनेक्शन जांच लें।</li>
+            <li>एक बार परीक्षा शुरू होने के बाद उसे रोका नहीं जा सकता।</li>
+        </ul>
+    </div>
+
+</div>
+
+
+        <!-- 🔊 SOUND ENABLED FORM -->
+        <form method="post"
+              action="{% url 'exams:exam-start' exam.id %}"
+              onsubmit="playExamStartSound(event)">
+            {% csrf_token %}
+            <div class="d-grid">
+                <button type="submit"
+                        onclick="playSound('{% static 'sounds/exam_start.mp3' %}')"
+                        class="btn btn-success btn-lg">
+                    <i class="bi bi-play-circle"></i> Start Exam
+                </button>
+            </div>
+        </form>
+
+        <p class="text-center text-muted mt-3 small">
+            <i class="bi bi-exclamation-triangle"></i>
+            Once started, exam cannot be paused.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- 🔊 SOUND SCRIPT (UNCHANGED) -->
+<script>
+function playExamStartSound(event) {
+    event.preventDefault();   // stop instant submit
+
+    const audio = new Audio("{% static 'sounds/exam_start.mp3' %}");
+    audio.volume = 0.4;
+    audio.play();
+
+    // submit after sound plays
+    setTimeout(() => {
+        event.target.submit();
+    }, 700); // sound duration timing
+}
+</script>
+
+{% endblock %}

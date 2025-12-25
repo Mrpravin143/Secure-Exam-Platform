@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex justify-content-center my-5">
+
+    <div class="card shadow-sm" style="width:420px; border:1px solid #999;">
+
+        <!-- Header -->
+        <div class="card-header bg-light text-center py-3">
+            <h6 class="fw-bold mb-0">
+                <i class="bi bi-envelope-check"></i>
+                Email Verification
+            </h6>
+            <small class="text-muted">
+                OTP will be sent to your registered email
+            </small>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4">
+
+            <div class="alert alert-secondary small mb-4">
+                <i class="bi bi-info-circle"></i>
+                Please verify your email address to continue the examination process.
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="text-center">
+                    <button type="submit"
+                            class="btn btn-secondary btn-sm px-4"
+                            onclick="playSound('{% static 'sounds/login.mp3' %}')">
+                        Send OTP to Email
+                        <i class="bi bi-send ms-1"></i>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

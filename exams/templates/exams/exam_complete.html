@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Exam Submitted{% endblock %}
+{% block content %}
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 650px;
+        margin: 80px auto;
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .success-icon {
+        font-size: 60px;
+        color: #28a745;
+    }
+    h2 {
+        margin-top: 20px;
+        color: #333;
+    }
+    p {
+        color: #555;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    .info-box {
+        margin-top: 25px;
+        background: #f8f9fa;
+        padding: 15px;
+        border-left: 5px solid #007bff;
+        text-align: left;
+    }
+    .footer {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #777;
+    }
+    .btn {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 10px 22px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container">
+
+    <div class="success-icon">
+        <i class="bi bi-check-circle-fill"></i>
+    </div>
+
+    <h2>Exam Submitted Successfully</h2>
+
+    <p>
+        Thank you for completing the examination.  
+        Your responses have been recorded successfully.
+    </p>
+
+    <div class="info-box">
+        <p><b><i class="bi bi-info-circle"></i> Important Information:</b></p>
+        <ul>
+            <li><i class="bi bi-hourglass-split"></i> Your result is currently under review.</li>
+            <li><i class="bi bi-person-check"></i> The result will be published by the examination administrator.</li>
+            <li><i class="bi bi-envelope-check"></i> You will receive an email notification once the result is published.</li>
+        </ul>
+    </div>
+
+    <a href="{% url 'exams:result_check' %}" class="btn">
+        <i class="bi bi-bar-chart-line"></i>
+        Check Result (After Publish)
+    </a>
+
+    <div class="footer">
+        <p>
+            R.C. Patel Institute of Management Research and Development<br>
+            <i class="bi bi-cpu"></i> IMRD Tech Club
+        </p>
+    </div>
+
+</div>
+{% endblock %}

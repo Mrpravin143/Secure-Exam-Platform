@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+
+    <div class="card shadow-lg p-4" style="max-width: 420px; width:100%;">
+
+        <!-- Title -->
+        <h3 class="text-center fw-bold mb-3 text-primary">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+        </h3>
+
+        <p class="text-center text-muted mb-4">
+            Enter your credentials to access the examination portal
+        </p>
+
+        <!-- Error -->
+        {% if error %}
+            <div class="alert alert-danger text-center py-2">
+                <i class="bi bi-exclamation-triangle"></i> {{ error }}
+            </div>
+        {% endif %}
+
+        <!-- Login Form -->
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input type="email"
+                           name="email"
+                           class="form-control"
+                           placeholder="Enter email"
+                           required>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock"></i>
+                    </span>
+                    <input type="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Enter password"
+                           required>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="d-grid mt-4">
+                <button type="submit"
+                        class="btn btn-primary btn-lg"
+                        onclick="playSound('{% static 'sounds/login.mp3' %}')">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                </button>
+            </div>
+        </form>
+
+        <!-- Footer Note -->
+        <p class="text-center text-muted small mt-3 mb-0">
+            <i class="bi bi-shield-lock"></i>
+            Your login details are secure
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
