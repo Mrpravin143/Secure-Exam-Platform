@@ -2,6 +2,7 @@ from django.urls import path
 from accounts.views import *
 
 urlpatterns = [
+    path('', home_view, name='home'),
     path('register/personal/', PersonalInfoView.as_view(), name='personal-info'),
     path('register/education/', EducationInfoView.as_view(), name='education-info'),
     path('register/upload/', UploadInfoView.as_view(), name='upload-info'),
@@ -13,6 +14,6 @@ urlpatterns = [
     # urls.py
     path('logout/', logout_view, name='logout'),
 
-]
 
+]
 

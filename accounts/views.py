@@ -13,7 +13,9 @@ from rest_framework.permissions import IsAuthenticated
 
 import random
 from django.core.mail import send_mail
+
 from accounts.models import *
+from accounts.serializers import *
 
 from django.views import View
 from django.conf import settings
@@ -22,7 +24,13 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 
 
+# home page view
+def home_view(request):
+    achievements = Achievement.objects.all().order_by('-created_at')
+    return render(request, 'home/index.html', {'achievements': achievements})
 
+def combined_view(request):
+    return render(request, 'registration/combined_registration.html')
 
 
 class PersonalInfoView(View):

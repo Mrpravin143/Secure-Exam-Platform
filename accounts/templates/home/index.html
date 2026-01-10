@@ -1,0 +1,172 @@
+{% load static %}
+<html>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <div class="container">
+        <a class="navbar-brand logo">Exam<span>Conduct</span></a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            ☰
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link active">Home</a></li>
+                <li class="nav-item"><a class="nav-link">Exam Management</a></li>
+                <li class="nav-item"><a class="nav-link">Event Management</a></li>
+                <li class="nav-item"><a class="nav-link">Reports</a></li>
+                <li class="nav-item"><a class="nav-link">Support</a></li>
+                <li class="nav-item"><button class="btn btn-outline-primary ms-lg-2">Login</button></li>
+                <li class="nav-item"><button class="btn btn-primary ms-lg-2">Sign Up</button></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- LEFT -->
+            <div class="col-lg-6" data-aos="fade-right">
+                <h1 class="hero-title">
+                    Conduct & Manage Exams <br> with Ease!
+                </h1>
+                <p class="hero-subtitle">
+                    Streamline your assessments with our powerful online platform.
+                </p>
+
+                <div class="hero-btns">
+                    <button class="btn btn-primary btn-lg">Get Started</button>
+                    <button class="btn btn-outline-primary btn-lg ms-2">
+                        Watch Demo
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="col-lg-6 text-center d-none d-lg-block" data-aos="fade-left">
+                <img src="{% static 'images/home/homeimage.png' %}"
+                     class="hero-img"
+                     alt="ExamConduct AI">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- CARDS -->
+<section class="container cards-section">
+    <div class="row g-4">
+        <div class="col-md-6" data-aos="zoom-in">
+            <div class="manage-card exam">
+                <h3>Exam Management</h3>
+                <p>Create, Schedule & Monitor Exams</p>
+                <button class="btn btn-light"><a href="{% url 'personal-info' %}">Manage Exams</a></button>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="zoom-in">
+            <div class="manage-card event">
+                <h3>Event Management</h3>
+                <p>Organize & Manage Events</p>
+                <button class="btn btn-light">Manage Events</button>
+            </div>
+        </div>
+    </div>
+</section><br><br>
+
+<div class="marquee">
+    <marquee behavior="scroll" direction="left" style="color: red; font-size: large;">Welcome to ExamConduct - Your Smart Exam Management Platform!</marquee>
+</div>
+
+<!-- FEATURES -->
+<section class="features-section" data-aos="fade-up">
+    <h2>Key Features</h2>
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-3 col-6 feature-box">Live Proctoring</div>
+            <div class="col-md-3 col-6 feature-box">Analytics</div>
+            <div class="col-md-3 col-6 feature-box">Secure Platform</div>
+            <div class="col-md-3 col-6 feature-box">Auto Reports</div>
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="gallery-block grid-gallery">
+	<div class="container">
+		<div class="heading">
+			<h2>Grid Gallery</h2>
+		</div>
+		<div class="row">
+            {% for achievement in achievements %}
+			<div class="col-md-6 col-lg-4 item">
+				<a class="lightbox" href="{{ achievement.image.url }}">
+        	<img class="img-fluid image scale-on-hover" src="{{ achievement.image.url }}">
+        </a>
+            </div>
+            {% endfor %}
+		</div>
+	</div>
+</section>
+
+<!-- FLOATING CHATBOT -->
+<div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+
+<div class="chatbot-popup" id="chatbotPopup">
+    <div class="chat-header">
+        🤖 ExamConduct AI
+        <span onclick="toggleChatbot()">✖</span>
+    </div>
+    <div class="chat-body">
+        <p class="bot">Hello 👋 How can I help you?</p>
+    </div>
+    <div class="chat-input">
+        <input placeholder="Ask your question..." />
+        <button>➤</button>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 ExamConduct Platform
+</footer>
+
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+
+    function toggleChatbot(){
+    document.getElementById("chatbotPopup").classList.toggle("show");
+}
+
+baguetteBox.run('.grid-gallery', {
+		animation: 'slideIn'
+	});
+    </script>
+
+</body>
+</html>
+
+

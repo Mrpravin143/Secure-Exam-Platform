@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration | ExamConduct</title>
+    <link rel="stylesheet" href="{% static 'css/registration/combined.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">📘 Exam<span>Conduct</span></div>
+        <h2>Student Registration</h2>
+        <marquee>📢 Please fill all details carefully. OTP verification is mandatory.</marquee>
+    </div>
+
+    <div class="content">
+
+        <!-- ================= SINGLE FORM ================= -->
+        <form id="registrationForm" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- 🔹 PERSONAL -->
+            <h3>Personal Information</h3>
+            <div class="grid">
+                <input name="full_name" placeholder="Full Name *" required>
+                <input name="email" type="email" placeholder="Email *" required>
+                <input name="mobile" placeholder="Mobile *" required>
+                <input name="dob" type="date">
+                <textarea name="address" placeholder="Address"></textarea>
+            </div>
+
+            <!-- 🔹 EDUCATION -->
+            <h3>Education Information</h3>
+            <div class="grid">
+                <input name="qualification" placeholder="Qualification">
+                <input name="college" placeholder="College Name">
+                <input name="year" type="number" placeholder="Passing Year">
+            </div>
+
+            <!-- 🔹 PHOTO -->
+            <h3>Upload Photo</h3>
+            <input type="file" name="photo" required>
+
+            <button type="submit" class="register-btn">
+                Save & Send OTP
+            </button>
+        </form>
+
+        <!-- ================= OTP ================= -->
+        <div class="otp-box" style="display:none;" id="otpSection">
+            <h3>OTP Verification</h3>
+            <input id="otpInput" placeholder="Enter OTP">
+            <button onclick="verifyOTP()" class="verify-btn">
+                Verify OTP
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- 🤖 CHATBOT ICON -->
+<div class="chatbot-icon">
+    🤖
+</div>
+
+<script>
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+// 🔹 REGISTER API
+document.getElementById("registrationForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("/api/register/", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": csrfToken
+        },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message || "Registered successfully");
+        document.getElementById("otpSection").style.display = "block";
+        window.registeredEmail = formData.get("email");
+    })
+    .catch(err => alert("Error occurred"));
+});
+
+// 🔹 VERIFY OTP API
+function verifyOTP(){
+    fetch("/api/verify-otp/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        },
+        body: JSON.stringify({
+            email: window.registeredEmail,
+            otp: document.getElementById("otpInput").value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        if(data.message){
+            window.location.href = "/login/";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

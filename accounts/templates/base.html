@@ -5,129 +5,223 @@
     <meta charset="UTF-8">
     <title>Examination Portal</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Static CSS -->
     <link rel="stylesheet" href="{% static 'css/exam_portal.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
 
     <style>
-    body {
-        background-color: #e6e6e6;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* HEADER STRIP */
-    .top-header {
-        background-color: #f2f2f2;
-        border-bottom: 3px solid #666;
-        padding: 12px 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    }
-
-    .header-title {
-        font-size: 14px;
-        font-weight: bold;
-        line-height: 1.5;
-        color: #222;
-    }
-
-    .header-title h6 {
-        margin-top: 6px;
-        font-weight: bold;
-        letter-spacing: 0.3px;
-    }
-
-    /* CONTENT AREA */
-    .content-area {
-        min-height: 75vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 30px 15px;
-        flex-direction: column;
-    }
-
-    /* CARD LOOK INSIDE CONTENT */
-    .content-area .card {
-        border-radius: 10px;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-        border: none;
-        background: #ffffff;
-    }
-
-    /* FOOTER */
-    footer {
-        background: #f2f2f2;
-        border-top: 1px solid #999;
-        font-size: 12px;
-        box-shadow: 0 -2px 4px rgba(0,0,0,0.08);
-    }
-
-    footer div {
-        line-height: 1.5;
-        color: #333;
-    }
-
-    /* LOGOS */
-    .top-header img {
-        max-height: 70px;
-        width: auto;
-        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
-    }
-
-    /* USER AVATAR */
-    .nav-user-img {
-        border-radius: 50%;
-        border: 2px solid #666;
-    }
-
-    /* USER MENU */
-    .user-menu {
-        position: absolute;
-        top: 120%;
-        right: 0;
-        background: #fff;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        display: none;
-        min-width: 120px;
-        z-index: 999;
-    }
-
-    .user-menu a {
-        display: block;
-        padding: 8px 12px;
-        text-decoration: none;
-        color: #333;
-        font-size: 13px;
-    }
-
-    .user-menu a:hover {
-        background: #f2f2f2;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 767px) {
-        .header-title {
-            font-size: 12px;
+        body{
+            background:#e6e6e6;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
         }
-        .top-header .row {
-            text-align: center;
-        }
-        .top-header .col-2,
-        .top-header .col-6 {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 8px;
-        }
-    }
-</style>
 
+        /* ===== HEADER ===== */
+        .top-header{
+            background:#f2f2f2;
+            border-bottom:3px solid #666;
+            padding:14px 22px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.12);
+        }
 
+        .header-title{
+            font-size:14px;
+            font-weight:600;
+            color:#222;
+            line-height:1.6;
+        }
+
+        .header-title h6{
+            margin-top:6px;
+            font-weight:700;
+            letter-spacing:0.6px;
+            color:#000;
+        }
+
+        .header-logo{
+            max-height:70px;
+            filter:drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+        }
+
+        /* ===== USER INFO ===== */
+        .nav-user{
+            cursor:pointer;
+            padding:4px 8px;
+            border-radius:20px;
+            transition:0.3s;
+        }
+
+        .nav-user:hover{
+            background:#e0e0e0;
+        }
+
+        .nav-user-img{
+            width:38px;
+            height:38px;
+            object-fit:cover;
+            border-radius:50%;
+            border:2px solid #666;
+        }
+
+        .nav-app-no{
+            font-size:13px;
+            font-weight:600;
+            color:#333;
+        }
+
+        /* ===== USER MENU ===== */
+        .user-menu{
+            position:absolute;
+            top:130%;
+            right:0;
+            background:#fff;
+            border-radius:6px;
+            border:1px solid #ccc;
+            box-shadow:0 6px 14px rgba(0,0,0,0.18);
+            display:none;
+            min-width:140px;
+            overflow:hidden;
+            z-index:1000;
+        }
+
+        .user-menu a{
+            display:block;
+            padding:10px 14px;
+            font-size:13px;
+            color:#333;
+            text-decoration:none;
+            transition:0.3s;
+        }
+
+        .user-menu a:hover{
+            background:#f2f2f2;
+            padding-left:18px;
+        }
+
+        /* ===== CONTENT ===== */
+        .content-area{
+            min-height:75vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:35px 15px;
+            flex-direction:column;
+        }
+
+        .content-area .card{
+            border:none;
+            border-radius:12px;
+            background:#fff;
+            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+            animation:fadeUp 0.6s ease;
+        }
+
+        @keyframes fadeUp{
+            from{opacity:0; transform:translateY(15px);}
+            to{opacity:1; transform:translateY(0);}
+        }
+
+        /* ===== FOOTER ===== */
+        footer{
+            background:#f2f2f2;
+            border-top:1px solid #999;
+            font-size:12px;
+            box-shadow:0 -3px 6px rgba(0,0,0,0.1);
+        }
+
+        footer div{
+            color:#333;
+            line-height:1.6;
+        }
+
+        /* ===== CHATBOT ===== */
+        .chatbot-toggle{
+            position:fixed;
+            right:20px;
+            bottom:20px;
+            width:55px;
+            height:55px;
+            background:#333;
+            color:#fff;
+            border-radius:50%;
+            font-size:24px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            box-shadow:0 6px 15px rgba(0,0,0,0.3);
+            transition:0.3s;
+        }
+
+        .chatbot-toggle:hover{
+            transform:scale(1.08);
+            background:#000;
+        }
+
+        .chatbot-popup{
+            position:fixed;
+            bottom:85px;
+            right:20px;
+            width:300px;
+            background:#fff;
+            border-radius:10px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.3);
+            display:none;
+            overflow:hidden;
+        }
+
+        .chatbot-popup.show{
+            display:block;
+        }
+
+        .chat-header{
+            background:#333;
+            color:#fff;
+            padding:10px 14px;
+            font-size:14px;
+            font-weight:600;
+            display:flex;
+            justify-content:space-between;
+        }
+
+        .chat-body{
+            padding:12px;
+            font-size:13px;
+        }
+
+        .chat-input{
+            display:flex;
+            border-top:1px solid #ddd;
+        }
+
+        .chat-input input{
+            flex:1;
+            border:none;
+            padding:8px;
+            font-size:13px;
+        }
+
+        .chat-input button{
+            border:none;
+            background:#333;
+            color:#fff;
+            padding:0 14px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:767px){
+            .header-title{font-size:12px;}
+            .top-header .row{text-align:center;}
+            .top-header .col-2,.top-header .col-6{
+                justify-content:center;
+                margin-bottom:8px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -137,150 +231,102 @@
     <div class="container-fluid">
         <div class="row align-items-center">
 
-            <!-- Left Logo -->
             <div class="col-2 d-flex justify-content-start">
-                <img src="{% static 'images/TechClub.png' %}" 
-                     alt="TechClub" class="img-fluid header-logo">
+                <img src="{% static 'images/TechClub.png' %}" class="img-fluid header-logo">
             </div>
 
-            <!-- Title -->
             <div class="col-6 text-center header-title">
                 R.C. Patel Institute of Management Research and Development<br>
                 NAAC Grade: B+<br>
-                Kavayitri Bahinabai Chaudhari North Maharashtra University (KBCNMU), Jalgaon.<br>
-                <h6 class="mb-0"><b>IMRD Tech Club</b></h6>
+                Kavayitri Bahinabai Chaudhari North Maharashtra University (KBCNMU), Jalgaon.
+                <h6>IMRD Tech Club</h6>
             </div>
 
-            <!-- USER INFO -->
-           <!-- USER INFO -->
             <div class="col-2 d-flex justify-content-center align-items-center">
                 {% if request_user %}
                 <div class="nav-user position-relative d-flex align-items-center gap-1"
-                    onclick="toggleUserMenu(event)">
+                     onclick="toggleUserMenu(event)">
+                    <img src="{{ request_user.studentprofile.profile_image.url }}" class="nav-user-img">
+                    <span class="nav-app-no">{{ request_user.studentprofile.application_no }}</span>
 
-                    <img src="{{ request_user.studentprofile.profile_image.url }}"
-                        class="nav-user-img">
-
-                    <span class="nav-app-no">
-                        {{ request_user.studentprofile.application_no }}
-                    </span>
-
-                    <!-- DROPDOWN -->
                     <div class="user-menu" id="userMenu">
-                        <a href="javascript:void(0)" onclick="openLogoutModal(event)">
-                            Logout
-                        </a>
+                        <a href="javascript:void(0)" onclick="openLogoutModal(event)">Logout</a>
                     </div>
                 </div>
                 {% endif %}
             </div>
 
-            
-
-            <!-- Right Logo -->
             <div class="col-2 d-flex justify-content-end">
-                <img src="{% static 'images/RCP.png' %}" 
-                     alt="RCP" class="img-fluid header-logo">
+                <img src="{% static 'images/RCP.png' %}" class="img-fluid header-logo">
             </div>
 
         </div>
     </div>
 </div>
 
-<!-- ===== MAIN CONTENT ===== -->
+<!-- ===== CONTENT ===== -->
 <div class="content-area">
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
+</div>
+
+<!-- ===== CHATBOT ===== -->
+<div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+
+<div class="chatbot-popup" id="chatbotPopup">
+    <div class="chat-header">
+        🤖 ExamConduct AI
+        <span onclick="toggleChatbot()">✖</span>
+    </div>
+    <div class="chat-body">
+        <p>Hello 👋 How can I help you?</p>
+    </div>
+    <div class="chat-input">
+        <input placeholder="Ask your question...">
+        <button>➤</button>
+    </div>
 </div>
 
 <!-- ===== FOOTER ===== -->
-<!-- ===== FOOTER ===== -->
 <footer class="text-center py-2">
-    <div>
-        © 2025 <b>Examination Portal</b> |
-         <i class="bi bi-cpu"></i> IMRD Tech Club
-    </div>
-    <div>
-        Developed by <b>Pravin Tukaram Patil</b> (Technical Member)
-    </div>
+    <div>© 2025 <b>Examination Portal</b> | <i class="bi bi-cpu"></i> IMRD Tech Club</div>
+    <div>Developed by <b>Pravin Tukaram Patil</b> (Technical Member)</div>
 </footer>
 
-
-<!-- LOGOUT CONFIRMATION MODAL -->
+<!-- LOGOUT MODAL -->
 <div class="modal fade" id="logoutModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 class="modal-title">Confirm Logout</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-
-      <div class="modal-body">
-        Are you sure you want to logout?
-      </div>
-
+      <div class="modal-body">Are you sure you want to logout?</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancel
-        </button>
-        <a href="{% url 'logout' %}" class="btn btn-danger">
-            Logout
-        </a>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- logout menu -->
-<!-- logout menu -->
-<script>
-function toggleUserMenu(event) {
-    event.stopPropagation();
-    const menu = document.getElementById("userMenu");
-    if (!menu) return;
-
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-}
-
-document.addEventListener("click", function () {
-    const menu = document.getElementById("userMenu");
-    if (menu) menu.style.display = "none";
-});
-
-function openLogoutModal(event) {
-    event.stopPropagation();
-
-    const menu = document.getElementById("userMenu");
-    if (menu) menu.style.display = "none";
-
-    const modal = new bootstrap.Modal(
-        document.getElementById('logoutModal')
-    );
-    modal.show();
-}
-</script>
-
-<!-- ✅ Bootstrap JS (MANDATORY) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- sounds.js -->
-<script src="{% static 'js/sounds.js' %}"></script>
-
 <script>
-function playSound(src) {
-    const audio = new Audio(src);
-    audio.volume = 0.5;
-    audio.play().catch(() => {});
+function toggleUserMenu(e){
+    e.stopPropagation();
+    const m=document.getElementById("userMenu");
+    m.style.display=m.style.display==="block"?"none":"block";
+}
+document.addEventListener("click",()=>{const m=document.getElementById("userMenu");if(m)m.style.display="none";});
+function openLogoutModal(e){
+    e.stopPropagation();
+    document.getElementById("userMenu").style.display="none";
+    new bootstrap.Modal(document.getElementById("logoutModal")).show();
+}
+function toggleChatbot(){
+    document.getElementById("chatbotPopup").classList.toggle("show");
 }
 </script>
-
-
-</body>
-</html>
-
-
 
 </body>
 </html>

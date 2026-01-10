@@ -1,6 +1,5 @@
 from django.contrib import admin
-from accounts.models import User, StudentProfile, EmailOTP
-
+from accounts.models import User, StudentProfile, EmailOTP, Achievement
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ("email", "full_name", "role", "is_staff", "is_active", "created_at")
@@ -20,3 +19,9 @@ class EmailOTPAdmin(admin.ModelAdmin):
     list_display = ("user", "otp", "created_at")
     search_fields = ("user__email",)
     ordering = ("-created_at",)
+
+
+@admin.register(Achievement)
+class AchievementAdmin(admin.ModelAdmin):
+  
+    search_fields = ('created_at',)

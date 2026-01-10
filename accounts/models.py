@@ -37,9 +37,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 
-
-
-
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -74,3 +71,14 @@ class EmailOTP(models.Model):
     def is_valid(self):
         """Check OTP expiry (5 mins)"""
         return timezone.now() <= self.created_at + timedelta(minutes=5)
+
+
+# Achivements
+class Achievement(models.Model):
+  
+    image = models.ImageField(upload_to='achievements/')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
