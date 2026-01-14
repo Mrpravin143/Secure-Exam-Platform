@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'accounts',
+    'chatbot',
 ]
 
 SITE_ID = 1

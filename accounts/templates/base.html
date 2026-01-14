@@ -139,78 +139,9 @@
         }
 
         /* ===== CHATBOT ===== */
-        .chatbot-toggle{
-            position:fixed;
-            right:20px;
-            bottom:20px;
-            width:55px;
-            height:55px;
-            background:#333;
-            color:#fff;
-            border-radius:50%;
-            font-size:24px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            cursor:pointer;
-            box-shadow:0 6px 15px rgba(0,0,0,0.3);
-            transition:0.3s;
-        }
+       
 
-        .chatbot-toggle:hover{
-            transform:scale(1.08);
-            background:#000;
-        }
 
-        .chatbot-popup{
-            position:fixed;
-            bottom:85px;
-            right:20px;
-            width:300px;
-            background:#fff;
-            border-radius:10px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.3);
-            display:none;
-            overflow:hidden;
-        }
-
-        .chatbot-popup.show{
-            display:block;
-        }
-
-        .chat-header{
-            background:#333;
-            color:#fff;
-            padding:10px 14px;
-            font-size:14px;
-            font-weight:600;
-            display:flex;
-            justify-content:space-between;
-        }
-
-        .chat-body{
-            padding:12px;
-            font-size:13px;
-        }
-
-        .chat-input{
-            display:flex;
-            border-top:1px solid #ddd;
-        }
-
-        .chat-input input{
-            flex:1;
-            border:none;
-            padding:8px;
-            font-size:13px;
-        }
-
-        .chat-input button{
-            border:none;
-            background:#333;
-            color:#fff;
-            padding:0 14px;
-        }
 
         /* ===== RESPONSIVE ===== */
         @media(max-width:767px){
@@ -270,21 +201,7 @@
 </div>
 
 <!-- ===== CHATBOT ===== -->
-<div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
 
-<div class="chatbot-popup" id="chatbotPopup">
-    <div class="chat-header">
-        🤖 ExamConduct AI
-        <span onclick="toggleChatbot()">✖</span>
-    </div>
-    <div class="chat-body">
-        <p>Hello 👋 How can I help you?</p>
-    </div>
-    <div class="chat-input">
-        <input placeholder="Ask your question...">
-        <button>➤</button>
-    </div>
-</div>
 
 <!-- ===== FOOTER ===== -->
 <footer class="text-center py-2">
@@ -323,10 +240,11 @@ function openLogoutModal(e){
     document.getElementById("userMenu").style.display="none";
     new bootstrap.Modal(document.getElementById("logoutModal")).show();
 }
-function toggleChatbot(){
-    document.getElementById("chatbotPopup").classList.toggle("show");
-}
+
 </script>
+
+
+<!-- chatbot logic -->
 
 </body>
 </html>
